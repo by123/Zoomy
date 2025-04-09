@@ -1,5 +1,5 @@
-import UIKit
 import Accelerate
+import UIKit
 
 class ImageZoomControllerIsPresentingImageViewOverlayState {
 
@@ -218,7 +218,8 @@ extension ImageZoomControllerIsPresentingImageViewOverlayState {
     let differenceBetweenNeededFrame = owner.adjustedScrollViewFrame()
       .difference(with: fromFrame)
     if owner.zoomScale(from: owner.overlayImageView)
-      <= owner.settings.maximumZoomScale {
+      <= owner.settings.maximumZoomScale
+    {
       contentOffsetToZoomDifference = CGPoint.zero
       neededContentOffSet = CGPoint(
         x: differenceBetweenNeededFrame.origin.x,
@@ -290,7 +291,7 @@ extension ImageZoomControllerIsPresentingImageViewOverlayState {
       owner.scrollView.pinchGestureRecognizer?.isEnabled = true
       owner.scrollableImageView.image = owner.image
       owner.scrollableImageView.contentMode = neededContentMode
-      owner.scrollView.addLongPressActionWithBlock(tapBlock: {_, gesture in
+      owner.scrollView.addLongPressAction(tapBlock: {_, gesture in
         let isTap = gesture.state == .began
           if let contrastImage = owner.contrastImage,
             let size = owner.image?.size,
@@ -346,7 +347,6 @@ extension ImageZoomControllerIsPresentingImageViewOverlayState {
 
     return try? UIImage(cgImage: destBuffer.createCGImage(format: format))
   }
-
 
   fileprivate func hideScrollableImageViewWhileKeepingItUserInteractable() {
     guard let owner = owner,

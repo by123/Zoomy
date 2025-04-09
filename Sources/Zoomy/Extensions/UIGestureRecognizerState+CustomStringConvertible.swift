@@ -1,6 +1,6 @@
 import UIKit
 
-extension UIGestureRecognizer.State: CustomStringConvertible {
+extension UIGestureRecognizer.State {
   public var description: String {
     switch self {
     case .began:
