@@ -5,7 +5,9 @@ import PackageDescription
 
 let package = Package(
     name: "Zoomy",
-    platforms: [.iOS(.v14)],
+    platforms: [
+        .iOS(.v13)
+    ],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
@@ -20,5 +22,6 @@ let package = Package(
             dependencies: [],
             path: "Sources")
 
-    ]
+    ],
+    swiftLanguageModes: [.v4]
 )

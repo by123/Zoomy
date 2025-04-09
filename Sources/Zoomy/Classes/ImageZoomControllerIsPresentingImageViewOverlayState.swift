@@ -292,7 +292,7 @@ extension ImageZoomControllerIsPresentingImageViewOverlayState {
       owner.scrollableImageView.contentMode = neededContentMode
       owner.scrollView.addLongPressActionWithBlock(tapBlock: {_, gesture in
         let isTap = gesture.state == .began
-        if let contrastImage = owner.contrastImage, contrastImage.bytesSize > 0,
+          if let contrastImage = owner.contrastImage,
             let size = owner.image?.size,
            let resizeImage = self.resizeImage(contrastImage, targetSize: size) {
           owner.scrollableImageView.image =  isTap ? resizeImage : owner.image
