@@ -26,6 +26,7 @@ extension UIView {
       target: self,
       action: #selector(onLongPress(sender:)))
     tapGesture.minimumPressDuration = 0.1
+    tapGesture.allowableMovement = 20
     addGestureRecognizer(tapGesture)
   }
 

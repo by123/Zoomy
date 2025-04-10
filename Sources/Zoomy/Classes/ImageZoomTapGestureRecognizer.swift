@@ -15,7 +15,12 @@ class ImageZoomTapGestureRecognizer: UITapGestureRecognizer {
 
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent) {
     super.touchesBegan(touches, with: event)
-    onTouchBegan?()
+    // 仅有一个手指长按，触发
+    if touches.count == 1 {
+      onTouchBegan?()
+    } else {
+      onTouchEnded?()
+    }
   }
 
   override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent) {

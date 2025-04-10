@@ -291,7 +291,24 @@ extension ImageZoomControllerIsPresentingImageViewOverlayState {
       owner.scrollView.pinchGestureRecognizer?.isEnabled = true
       owner.scrollableImageView.image = owner.image
       owner.scrollableImageView.contentMode = neededContentMode
-      owner.scrollView.addLongPressAction(tapBlock: {_, gesture in
+      owner.scrollableImageView.isUserInteractionEnabled = true
+      
+//      let tapGesture = ImageZoomTapGestureRecognizer(
+//        target: self, action: #selector(self.handleTapPress(_:)))
+//      tapGesture.onTouchBegan = {
+//        if let contrastImage = owner.contrastImage,
+//          let size = owner.image?.size,
+//           let resizeImage = self.resizeImage(contrastImage, targetSize: size) {
+//          owner.scrollableImageView.image = resizeImage
+//        }
+//      }
+//      tapGesture.onTouchEnded = {
+//        owner.scrollableImageView.image = owner.image
+//      }
+//      owner.scrollableImageView.addGestureRecognizer(tapGesture)
+      
+      owner.scrollableImageView.addLongPressAction(tapBlock: {_, gesture in
+        print("Zoomy: action \(gesture.state)")
         let isTap = gesture.state == .began
           if let contrastImage = owner.contrastImage,
             let size = owner.image?.size,
@@ -302,6 +319,8 @@ extension ImageZoomControllerIsPresentingImageViewOverlayState {
       onComplete()
     }
   }
+  
+  @objc func handleTapPress(_ gesture: UITapGestureRecognizer) {}
 
   func resizeImage(_ image: UIImage, targetSize: CGSize) -> UIImage? {
     guard let cgImage = image.cgImage else { return nil }
@@ -345,7 +364,9 @@ extension ImageZoomControllerIsPresentingImageViewOverlayState {
       vImage_Flags(kvImageHighQualityResampling)
     )
 
-    return try? UIImage(cgImage: destBuffer.createCGImage(format: format))
+    let image = try? UIImage(cgImage: destBuffer.createCGImage(format: format))
+    print("Zoomy: resize image \(image)")
+    return image
   }
 
   fileprivate func hideScrollableImageViewWhileKeepingItUserInteractable() {
